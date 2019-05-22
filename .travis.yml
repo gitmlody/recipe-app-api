@@ -1,0 +1,11 @@
+language: python # these things will happend automatialy every time when we push some change on the github
+python:          # 1. spin up the python server running python 3.6
+  - "3.6"        # 2. make docker service avaliable
+                 # 3. install docker compose and finaly run the our script
+services:        # 4. and it test exits with falliure we will get notification get a notification
+  - docker
+
+before_script: pip install docker-compose
+
+script:
+  - docker-compose run app sh -c "python.mange.py test && flake8"
