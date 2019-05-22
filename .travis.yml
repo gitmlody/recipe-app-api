@@ -8,4 +8,4 @@ services:        # 4. and it test exits with falliure we will get notification g
 before_script: pip install docker-compose
 
 script:
-  - docker-compose run app sh -c "python.mange.py test && flake8"
+  - docker-compose run app sh -c "python mange.py test && flake8"
