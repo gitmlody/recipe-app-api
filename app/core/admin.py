@@ -24,8 +24,10 @@ class UserAdmin(BaseUserAdmin):
         (_('Important dates'), {'fields': ('last_login',)}),
     )
 
+    #This is from the Django Admin documentation
     add_fieldsets = (
-        (None, {
+        (None """this is the title of the section""", 
+        {
             'classes': ('wide',),
             'fields' : ('email', 'password1', 'password2')
         }),

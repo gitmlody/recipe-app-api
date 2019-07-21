@@ -35,7 +35,7 @@ class AdminSiteTests(TestCase):
     def  test_create_user_page(self):
         """test whether the create user page renders corectly"""
         #create url to this webpage
-        url = reverse('admin:core_user_add')
+        url = reverse('admin:core_user_add') """Standard URL alias for the add page for the user model"""
         #get to this just created url
         res = self.client.get(url)
         #check if status code is equal 200, what means that page works corectly
