@@ -26,7 +26,7 @@ class UserAdmin(BaseUserAdmin):
 
     #This is from the Django Admin documentation
     add_fieldsets = (
-        (None """this is the title of the section""", 
+        (None,#this is the title of the section
         {
             'classes': ('wide',),
             'fields' : ('email', 'password1', 'password2')

@@ -1,7 +1,7 @@
 version: "3" #docker version
 
 services:
-  app:
+  app: #new service (application)
     build:
       context: .
     ports:
@@ -9,18 +9,21 @@ services:
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
-    environment:
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment: #set up application to use database
       - DB_HOST=db
       - DB_NAME=app
       - DB_USER=postgres
       - DB_PASS=mypassword
-    depends_on:
+    depends_on: #this make that database service will start before the app service and that database service will be avaliable via the network when I use the host name ('db')
       - db
 
-  db:
-    image: postgres:10-alpine
-    environment:
+  db: #new service (database)
+    image: postgres:10-alpine #this locates the postgres image on the docker hub
+    environment: #configuration options (database name, username and password)
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_PASSWORD=mypassword #in real world application you would use here an encrypted environmental variable which overrides this when you push application
+      #since it is not a good idea to commit any secreat password or private SSA keys. But I run this on local development server so this is not a problem,
